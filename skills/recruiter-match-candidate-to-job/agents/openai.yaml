@@ -1,0 +1,14 @@
+interface:
+  display_name: Evidence Based Job Matching
+  short_description: Evidence Based Job Matching workflow
+  default_prompt: Use $recruiter-match-candidate-to-job to compare a candidate with
+    a specific vacancy using a requirement-to-evidence matrix.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

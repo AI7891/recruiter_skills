@@ -1,0 +1,14 @@
+interface:
+  display_name: Follow Up and Interview Scheduling
+  short_description: Follow Up and Interview Scheduling workflow
+  default_prompt: Use $recruiter-manage-job-followups to coordinate recruitment follow-ups,
+    interview availability and scheduled job-search reminders.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

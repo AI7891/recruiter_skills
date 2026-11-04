@@ -1,0 +1,14 @@
+interface:
+  display_name: Vacancy Discovery and Verification
+  short_description: Vacancy Discovery and Verification workflow
+  default_prompt: Use $recruiter-discover-verify-vacancies to find live job openings
+    and verify freshness, authenticity and duplicates for defined candidate targets.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

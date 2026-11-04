@@ -1,0 +1,14 @@
+interface:
+  display_name: Recruitment Privacy and Quality Control
+  short_description: Recruitment Privacy and Quality Control workflow
+  default_prompt: Use $recruiter-guard-recruitment-workflow to audit recruitment workflows
+    for evidence quality, personal-data exposure, authorization and action reliability.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

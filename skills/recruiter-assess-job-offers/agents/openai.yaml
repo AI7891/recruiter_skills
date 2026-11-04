@@ -1,0 +1,14 @@
+interface:
+  display_name: Offer Assessment and Negotiation
+  short_description: Offer Assessment and Negotiation workflow
+  default_prompt: Use $recruiter-assess-job-offers to compare employment offers and
+    prepare evidence-based negotiation points aligned with candidate priorities.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

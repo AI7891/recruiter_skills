@@ -1,0 +1,14 @@
+interface:
+  display_name: Interview Preparation
+  short_description: Interview Preparation workflow
+  default_prompt: Use $recruiter-prepare-job-interview to prepare role-specific interview
+    practice, technical exercises and truthful behavioral answers.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

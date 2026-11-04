@@ -1,0 +1,14 @@
+interface:
+  display_name: Application Execution and Tracking
+  short_description: Application Execution and Tracking workflow
+  default_prompt: Use $recruiter-execute-track-applications to complete authorized
+    job applications and maintain a deduplicated application record.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
