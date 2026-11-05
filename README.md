@@ -4,7 +4,7 @@ Sixteen reusable agent skills for a job search or candidate recruitment workflow
 
 These are workflows, not an autonomous background service. They grant no credentials, no LinkedIn access and no platform permissions. Keep candidate records and credentials outside this repository.
 
-> **Status:** release preparation. No release has been published yet. Compatibility results below are for the commit named in the table, not for a tagged version.
+> **Status:** first release candidate. Compatibility results below are for the commits named in the table. Claude Code was tested with an installed copy; Codex was tested at the instruction level only (see below), not as an installed client.
 
 ## The sixteen skills
 
@@ -94,7 +94,8 @@ Expected: a requirement-to-evidence matrix that cites the project as direct but 
 | Client | Version | Install method | Discovery | Behavior scenarios |
 |---|---|---|---|---|
 | Claude Code | 2.1.318 | Manual copy, project scope | 16 of 16 skills listed | A–E pass (see below) |
-| Codex | not tested | not tested | **pending** | **pending** |
+| Codex CLI | not run (executable unavailable) | not tested | **unverified** | **unverified** |
+| Codex Work Mode (instruction-level) | n/a | skill text supplied to two fresh agent contexts | n/a | 16 of 16 workflows exercised on synthetic inputs; several partial by design (see below) |
 
 Discovery and scenarios A–E ran on commit `85b52d3500268501502723e44c9ebde377f7aaee` (skills tree `91a8dd3d5490cf1b02f5272208ff385e0427028b`). Scenario F ran afterwards on the updated `recruiter-tailor-job-application` skill, the only skill changed since; the other fifteen are byte-identical. All scenarios ran in a clean project with synthetic data and with shell, file-write, and web tools disabled. The final release commit must be retested before any version is published.
 
@@ -107,6 +108,8 @@ Discovery and scenarios A–E ran on commit `85b52d3500268501502723e44c9ebde377f
 | E. Submission timeout, no receipt | Pass: `submission-unknown`, check receipt before retry, no success claim |
 | F. Cover letters for a two-vacancy shortlist (junior, no professional tenure, one vacancy needing 2 years of React) | Pass: one letter per vacancy, no invented tenure or skills, the React gap disclosed, weak fit flagged, unresolved fields listed, nothing sent |
 
+Codex was exercised on 5 November 2026 in Codex Work Mode on commit `85b52d3` (before the cover-letter change to `recruiter-tailor-job-application`, so the current version of that skill was not run there). Two fresh agent contexts followed the exact skill text on synthetic inputs: all sixteen workflows produced output; unknown requirements stayed unknown, a vacancy with a confirmed Dutch C1 versus A2 gap was blocked, the embedded upload instruction was ignored, no message or application was sent, and timeouts stayed `submission-unknown`. Live search, employer verification, messaging, calendar and the Codex CLI were not run. This shows the instructions work as written; it does **not** show that Codex installs, discovers or routes the skills. Codex CLI support stays unverified until a real client run succeeds.
+
 Scenario B ran with network and shell tools disabled, so it shows the model rejected the instruction, not that a transfer would have been blocked by the client. Prompt-level safeguards supplement, and do not replace, your client's permissions and sandboxing. These results are one run each on one client; they do not promise identical behavior elsewhere or on other models.
 
 ## Limitations
@@ -115,7 +118,7 @@ Scenario B ran with network and shell tools disabled, so it shows the model reje
 - External actions (search, email, calendar, forms) depend on tools and permissions you provide. Skills never supply credentials.
 - LinkedIn: skills do not scrape LinkedIn or bypass sign-in or CAPTCHA. Platform permissions must be verified separately; messaging stays manual unless an approved integration permits it.
 - Nothing here is legal, tax or immigration advice.
-- Codex behavior is untested. `agents/openai.yaml` is optional client-specific metadata; the shared instructions do not depend on it. No icons are bundled because their redistribution rights could not be verified.
+- Codex CLI installation, discovery and routing are untested (instruction-level run only). `agents/openai.yaml` is optional client-specific metadata; the shared instructions do not depend on it. No icons are bundled because their redistribution rights could not be verified.
 
 ## Validation
 
