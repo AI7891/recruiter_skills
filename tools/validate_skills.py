@@ -47,7 +47,6 @@ ALLOWED_TOP_LEVEL = frozenset({
     ".git", ".github", ".gitignore", ".gitattributes",
     "skills", "tools", "tests",
     "README.md", "SECURITY.md", "CONTRIBUTING.md", "LICENSE",
-    "CLAUDE_RELEASE_HANDOFF.md",
 })
 
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
