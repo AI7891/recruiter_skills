@@ -1,0 +1,12 @@
+interface:
+  display_name: Daily Vacancy Scan
+  short_description: Daily Vacancy Scan workflow
+  default_prompt: Use $recruiter-run-daily-vacancy-scan to run a recurring vacancy screening
+    for primary and fallback role tiers and report only what is new, verified and eligible.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

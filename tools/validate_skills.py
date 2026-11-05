@@ -35,6 +35,7 @@ EXPECTED_SKILLS = frozenset({
     "recruiter-prepare-recruiter-outreach",
     "recruiter-prioritize-applications",
     "recruiter-research-hiring-context",
+    "recruiter-run-daily-vacancy-scan",
     "recruiter-screen-job-eligibility",
     "recruiter-tailor-job-application",
 })
