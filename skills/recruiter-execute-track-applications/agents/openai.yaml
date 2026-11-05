@@ -3,8 +3,6 @@ interface:
   short_description: Application Execution and Tracking workflow
   default_prompt: Use $recruiter-execute-track-applications to complete authorized
     job applications and maintain a deduplicated application record.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

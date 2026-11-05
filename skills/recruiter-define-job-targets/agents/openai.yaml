@@ -3,8 +3,6 @@ interface:
   short_description: Job Target Definition workflow
   default_prompt: Use $recruiter-define-job-targets to define realistic job families,
     seniority and adjacent career targets from candidate evidence and preferences.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

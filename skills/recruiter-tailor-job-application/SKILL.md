@@ -1,6 +1,6 @@
 ---
 name: recruiter-tailor-job-application
-description: "Tailor CVs, cover letters and application answers to a specific vacancy without inventing credentials. Use when the user requests truthful application tailoring in a job search or candidate recruitment workflow."
+description: "Tailor CVs, draft one cover letter per vacancy and answer application questions without inventing credentials. Use when the user requests truthful application tailoring or cover letters in a job search or candidate recruitment workflow."
 ---
 
 # Truthful Application Tailoring
@@ -18,10 +18,12 @@ Canonical candidate profile, current CV, vacancy and requested language or forma
 2. Use vacancy terminology only where supported; state learning in progress accurately.
 3. Write clear achievement bullets using verified scope and results; omit invented numbers and hidden keyword stuffing.
 4. Answer each application question within its limit; flag unknown salary, authorization or availability answers rather than guessing.
-5. Produce readable documents using the relevant document skill when needed; compare final claims to the canonical profile.
+5. Write a cover letter for each vacancy the user names or approves, and for every vacancy in an approved shortlist unless the user declines. Keep it to one page, in the vacancy's language unless told otherwise. Open with the specific role and employer. Make two or three points, each tied to a verified candidate example and, where available, a documented employer need from an employer brief. State gaps and learning in progress honestly without apology or invention. Avoid generic flattery and template filler.
+6. For a shortlist, handle each vacancy independently and return one clearly labeled draft per vacancy. Never reuse a letter body for another employer without rechecking every employer-specific claim. Mark a vacancy blocked when its requirements are unknown; do not stop the other drafts.
+7. Produce readable documents using the relevant document skill when needed; compare final claims to the canonical profile.
 
 ## Deliverable
-Tailored CV/application text; claim-to-source check; unanswered fields needing candidate input.
+Tailored CV/application text; one cover letter draft per approved vacancy; claim-to-source check; unanswered fields needing candidate input.
 
 ## Completion check
-No invented metrics or qualifications; no guarantee of ATS success; drafting does not authorize submission.
+No invented metrics, qualifications or employer facts; no guarantee of ATS success; drafting does not authorize submission.

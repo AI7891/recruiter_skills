@@ -1,0 +1,10 @@
+# Code owners for the Recruiter Skills collection.
+# This file only requests reviews. It is enforced only when the Dev branch
+# ruleset enables "Require review from Code Owners". A PR author cannot give
+# an independent review of their own PR, so with a single maintainer this
+# stays advisory until a second reviewer with write access exists.
+
+/skills/   @AI7891
+/.github/  @AI7891
+/tools/    @AI7891
+/tests/    @AI7891

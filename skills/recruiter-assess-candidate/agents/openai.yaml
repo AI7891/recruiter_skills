@@ -3,8 +3,6 @@ interface:
   short_description: Candidate Assessment workflow
   default_prompt: Use $recruiter-assess-candidate to assess a candidate CV, skills
     inventory or career history and build a verified evidence profile.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

@@ -3,8 +3,6 @@ interface:
   short_description: Proof of Skill Development workflow
   default_prompt: Use $recruiter-develop-skill-evidence to design or improve a targeted
     portfolio sample, work exercise or case study to demonstrate a job-related skill.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

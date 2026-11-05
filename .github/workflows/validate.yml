@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [Dev]
+  push:
+    branches: [Dev]
+
+# Read-only token; no secrets are used and nothing is published from this workflow.
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # actions/checkout v4.3.1, pinned to a full commit SHA
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - name: Install pinned dependency with hash verification
+        run: python3 -m pip install --user --require-hashes -r tools/requirements.txt
+      - name: Run negative-fixture tests
+        run: python3 -I -m unittest discover -s tests -v
+      - name: Validate skills
+        run: python3 -I tools/validate_skills.py .
