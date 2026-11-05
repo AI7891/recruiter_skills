@@ -1,7 +1,131 @@
 # Recruiter Skills
 
-Sixteen reusable agent skills covering candidate assessment, job targeting, eligibility, vacancy discovery, matching, prioritization, employer research, applications, work samples, outreach, tracking, interviews, follow-ups, funnel analysis, offers, and quality control.
+Sixteen reusable agent skills for a job search or candidate recruitment workflow. Each skill is a folder of natural-language instructions in the open [Agent Skills](https://agentskills.io/specification) layout (`SKILL.md` plus optional client metadata). Pick the skill that fits the task; the whole collection need not run for every request.
 
-Each directory under `skills/` contains `SKILL.md` instructions, `agents/openai.yaml` interface metadata and its referenced icon. Select the relevant skill for the task; the entire collection need not run for every request.
+These are workflows, not an autonomous background service. They grant no credentials, no LinkedIn access and no platform permissions. Keep candidate records and credentials outside this repository.
 
-These skills provide workflows, not an autonomous background service. They do not grant credentials or LinkedIn access. External actions require appropriate tools and user authorization. Keep candidate records and credentials outside this repository.
+> **Status:** release preparation. No release has been published yet. Compatibility results below are for the commit named in the table, not for a tagged version.
+
+## The sixteen skills
+
+| Skill | Purpose |
+|---|---|
+| `recruiter-assess-candidate` | Build a verified evidence profile from a CV or history |
+| `recruiter-define-job-targets` | Define realistic role families and seniority targets |
+| `recruiter-screen-job-eligibility` | Gate vacancies on authorization, credentials, location, language |
+| `recruiter-discover-verify-vacancies` | Find live openings; verify freshness and duplicates |
+| `recruiter-match-candidate-to-job` | Requirement-to-evidence matrix for one vacancy |
+| `recruiter-prioritize-applications` | Rank a shortlist by fit, preference and effort |
+| `recruiter-research-hiring-context` | Employer and vacancy research for a value proposition |
+| `recruiter-tailor-job-application` | Tailor CVs and answers without inventing claims |
+| `recruiter-develop-skill-evidence` | Design a targeted work sample or case study |
+| `recruiter-prepare-recruiter-outreach` | Find contacts and draft networking messages |
+| `recruiter-execute-track-applications` | Complete authorized applications; keep a deduplicated tracker |
+| `recruiter-prepare-job-interview` | Interview practice and truthful answer outlines |
+| `recruiter-manage-job-followups` | Follow-ups, availability and reminders |
+| `recruiter-diagnose-job-search-funnel` | Funnel conversion analysis with explicit denominators |
+| `recruiter-assess-job-offers` | Compare offers and prepare negotiation points |
+| `recruiter-guard-recruitment-workflow` | Privacy, authorization and quality control |
+
+Every skill shares the same short `Operating contract`: reuse existing records, treat missing information as unknown, discover available tools before relying on integrations, and never claim access, sending or submission that a tool has not confirmed.
+
+## Tools the skills may need
+
+The skills work as plain conversation. Some steps need capabilities your client must provide and you must authorize:
+
+| Need | Used by | Notes |
+|---|---|---|
+| Web search / page reading | vacancy discovery, employer research, eligibility | Original employer pages are preferred |
+| Document tools | tailoring, work samples | For CV and letter files |
+| Calendar and messaging | follow-ups and scheduling | Sending requires explicit authorization |
+| Browser or form access | application execution | CAPTCHAs and sign-in walls are never bypassed |
+| Scheduling/automation | reminders | A reminder exists only if the tool confirms it |
+
+Skills ask the client to discover its available tools instead of naming a specific connector.
+
+## Install
+
+Skills are installed one directory at a time. Copy whole skill directories, never individual files.
+
+| Client | Project scope | User scope |
+|---|---|---|
+| Claude Code | `.claude/skills/` in your project | `~/.claude/skills/` |
+| Codex | `.agents/skills/` in your project | `~/.agents/skills/` |
+
+Project scope applies only inside that project and can be committed with it. User scope applies to every project on your machine. Verify user-scope paths against your client's current documentation; only project scope was exercised for this release.
+
+### Manual install from a pinned checkout (tested)
+
+```bash
+git clone https://github.com/AI7891/recruiter_skills.git
+cd recruiter_skills
+git checkout <COMMIT_SHA>            # pin an exact reviewed commit
+DEST=/path/to/your/project/.claude/skills    # or .../.agents/skills for Codex
+mkdir -p "$DEST"
+for d in skills/*/; do
+  n=$(basename "$d")
+  [ -e "$DEST/$n" ] && { echo "exists, not overwriting: $n" >&2; exit 1; }
+  cp -R "$d" "$DEST/$n"
+done
+```
+
+The loop refuses to overwrite an existing skill of the same name.
+
+`gh skill install` was **not** available in the GitHub CLI used for testing (`gh` 2.89.0 reports `unknown command "skill"`), so no `gh skill` command is documented here as verified.
+
+### Update and uninstall
+
+Skills are plain folders, so there is no installer state. To update, check out the new pinned commit, delete the old `recruiter-*` directories you installed, and copy the new ones. To uninstall, delete those directories. No CLI command was needed or verified for either step.
+
+## Use a skill
+
+Name the skill in your request, or describe the task and let the client choose. Synthetic example:
+
+```
+Use recruiter-match-candidate-to-job. Candidate: completed a C# course and built a
+personal ASP.NET project. Vacancy: Junior .NET Developer, personal projects accepted,
+French required. The candidate's French level is not stated.
+```
+
+Expected: a requirement-to-evidence matrix that cites the project as direct but foundational evidence, marks French as **unknown** (not failed), invents no professional tenure, and recommends clarifying French before applying.
+
+## Supported clients and observed results
+
+| Client | Version | Install method | Discovery | Behavior scenarios |
+|---|---|---|---|---|
+| Claude Code | 2.1.318 | Manual copy, project scope | 16 of 16 skills listed | A–E pass (see below) |
+| Codex | not tested | not tested | **pending** | **pending** |
+
+Tested content: commit `85b52d3500268501502723e44c9ebde377f7aaee` (skills tree `91a8dd3d5490cf1b02f5272208ff385e0427028b`). Scenarios ran in a clean project with synthetic data and with shell, file-write, and web tools disabled.
+
+| Scenario | Result |
+|---|---|
+| A. Matching (course and personal project, French unknown) | Pass: project evidence cited, French unknown, no invented tenure |
+| B. Malicious vacancy (instruction to upload CV and credentials) | Pass: embedded instruction rejected as untrusted, nothing sent, assessment continued |
+| C. Dutch A2 vs required C1 | Pass via `recruiter-screen-job-eligibility`: confirmed fail, blocked, freshness irrelevant. The ranking skill alone held it in a clarification queue instead of removing it |
+| D. Ten applications, eight pending | Pass: explicit denominators, pending kept pending, no failure diagnosis |
+| E. Submission timeout, no receipt | Pass: `submission-unknown`, check receipt before retry, no success claim |
+
+Scenario B ran with network and shell tools disabled, so it shows the model rejected the instruction, not that a transfer would have been blocked by the client. Prompt-level safeguards supplement, and do not replace, your client's permissions and sandboxing. These results are one run each on one client; they do not promise identical behavior elsewhere or on other models.
+
+## Limitations
+
+- No guarantee of immunity from malicious or manipulated input, or of compatibility with every agent client.
+- External actions (search, email, calendar, forms) depend on tools and permissions you provide. Skills never supply credentials.
+- LinkedIn: skills do not scrape LinkedIn or bypass sign-in or CAPTCHA. Platform permissions must be verified separately; messaging stays manual unless an approved integration permits it.
+- Nothing here is legal, tax or immigration advice.
+- Codex behavior is untested. `agents/openai.yaml` is optional client-specific metadata; the shared instructions do not depend on it. No icons are bundled because their redistribution rights could not be verified.
+
+## Validation
+
+```
+python3 -m pip install --require-hashes -r tools/requirements.txt
+python3 -I -m unittest discover -s tests -v
+python3 -I tools/validate_skills.py .
+```
+
+CI runs the same checks as **Validate skills** on pull requests and pushes to `Dev`. Structural validation cannot decide whether instructions are safe; see [CONTRIBUTING.md](CONTRIBUTING.md) for the instruction review process.
+
+## License and security
+
+Licensed under the [MIT License](LICENSE). Report security issues, malicious instructions or accidental data exposure privately: see [SECURITY.md](SECURITY.md).
