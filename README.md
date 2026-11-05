@@ -97,7 +97,7 @@ Expected: a requirement-to-evidence matrix that cites the project as direct but 
 | Codex CLI | not run (executable unavailable) | not tested | **unverified** | **unverified** |
 | Codex Work Mode (instruction-level) | n/a | skill text supplied to two fresh agent contexts | n/a | 16 of 16 workflows exercised on synthetic inputs; several partial by design (see below) |
 
-Discovery and scenarios A–E ran on commit `85b52d3500268501502723e44c9ebde377f7aaee` (skills tree `91a8dd3d5490cf1b02f5272208ff385e0427028b`). Scenario F ran afterwards on the updated `recruiter-tailor-job-application` skill, the only skill changed since; the other fifteen are byte-identical. All scenarios ran in a clean project with synthetic data and with shell, file-write, and web tools disabled. The final release commit must be retested before any version is published.
+Discovery and scenarios A–E ran on commit `85b52d3500268501502723e44c9ebde377f7aaee` (skills tree `91a8dd3d5490cf1b02f5272208ff385e0427028b`). Scenario F ran afterwards on the updated `recruiter-tailor-job-application` skill, the only skill changed since; the other fifteen are byte-identical. All scenarios ran in a clean project with synthetic data and with shell, file-write, and web tools disabled. Discovery was re-run on the final skills tree `1966b3b61a98adfc562d936d2abf64fa982b8ee0` (16 of 16 listed by Claude Code 2.1.318); the release commit carries this identical tree.
 
 | Scenario | Result |
 |---|---|
