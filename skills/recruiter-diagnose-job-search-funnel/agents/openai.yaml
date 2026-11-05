@@ -4,8 +4,6 @@ interface:
   default_prompt: Use $recruiter-diagnose-job-search-funnel to analyze job-search
     outcomes and identify evidence-backed improvements to targeting, applications
     and interviews.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

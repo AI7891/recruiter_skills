@@ -3,8 +3,6 @@ interface:
   short_description: Truthful Application Tailoring workflow
   default_prompt: Use $recruiter-tailor-job-application to tailor CVs, cover letters
     and application answers to a specific vacancy without inventing credentials.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

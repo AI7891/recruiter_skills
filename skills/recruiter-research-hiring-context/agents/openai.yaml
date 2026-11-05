@@ -3,8 +3,6 @@ interface:
   short_description: Employer and Hiring Context Research workflow
   default_prompt: Use $recruiter-research-hiring-context to research an employer and
     vacancy to develop a credible application value proposition.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

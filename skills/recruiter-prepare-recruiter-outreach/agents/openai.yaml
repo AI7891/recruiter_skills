@@ -3,8 +3,6 @@ interface:
   short_description: Targeted Networking and Outreach workflow
   default_prompt: Use $recruiter-prepare-recruiter-outreach to identify relevant recruiting
     contacts and draft personalized networking or referral messages.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

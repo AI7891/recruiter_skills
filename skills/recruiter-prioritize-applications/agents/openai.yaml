@@ -3,8 +3,6 @@ interface:
   short_description: Application Prioritization workflow
   default_prompt: Use $recruiter-prioritize-applications to rank a shortlist of jobs
     by evidence-backed fit, candidate preferences and preparation effort.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt

@@ -3,8 +3,6 @@ interface:
   short_description: Job Eligibility Screening workflow
   default_prompt: Use $recruiter-screen-job-eligibility to screen vacancies for work
     authorization, mandatory credentials, location, language and availability requirements.
-  icon_small: assets/icon.svg
-  icon_large: assets/icon.svg
 policy:
   products:
   - chatgpt
