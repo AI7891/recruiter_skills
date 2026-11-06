@@ -1,0 +1,11 @@
+interface:
+  display_name: Posting Legitimacy Check
+  short_description: Posting Legitimacy Check workflow
+  default_prompt: Use $recruiter-check-posting-legitimacy to judge whether a vacancy looks real, stale or fraudulent and report the evidence.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

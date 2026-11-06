@@ -1,0 +1,11 @@
+interface:
+  display_name: Vacancy Requirements Extraction
+  short_description: Vacancy Requirements Extraction workflow
+  default_prompt: Use $recruiter-extract-vacancy-requirements to turn a vacancy posting into a structured, source-quoted requirements record.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
