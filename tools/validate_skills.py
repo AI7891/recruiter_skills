@@ -23,11 +23,13 @@ except ImportError:  # pragma: no cover
 EXPECTED_SKILLS = frozenset({
     "recruiter-assess-candidate",
     "recruiter-assess-job-offers",
+    "recruiter-check-posting-legitimacy",
     "recruiter-define-job-targets",
     "recruiter-develop-skill-evidence",
     "recruiter-diagnose-job-search-funnel",
     "recruiter-discover-verify-vacancies",
     "recruiter-execute-track-applications",
+    "recruiter-extract-vacancy-requirements",
     "recruiter-guard-recruitment-workflow",
     "recruiter-manage-job-followups",
     "recruiter-match-candidate-to-job",

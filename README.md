@@ -6,7 +6,7 @@ These are workflows, not an autonomous background service. They grant no credent
 
 > **Status:** first release candidate. Compatibility results below are for the commits named in the table. Claude Code was tested with an installed copy; Codex was tested at the instruction level only (see below), not as an installed client.
 
-## The seventeen skills
+## The nineteen skills
 
 | Skill | Purpose |
 |---|---|
@@ -14,10 +14,12 @@ These are workflows, not an autonomous background service. They grant no credent
 | `recruiter-define-job-targets` | Define realistic role families and seniority targets |
 | `recruiter-screen-job-eligibility` | Gate vacancies on authorization, credentials, location, language |
 | `recruiter-discover-verify-vacancies` | Find live openings; verify freshness and duplicates |
+| `recruiter-extract-vacancy-requirements` | Turn a posting into a source-quoted requirements record other skills reuse |
+| `recruiter-check-posting-legitimacy` | Judge whether a vacancy looks real, stale or fraudulent, with evidence |
 | `recruiter-match-candidate-to-job` | Requirement-to-evidence matrix for one vacancy |
 | `recruiter-prioritize-applications` | Rank a shortlist by fit, preference and effort |
 | `recruiter-research-hiring-context` | Employer and vacancy research for a value proposition |
-| `recruiter-run-daily-vacancy-scan` | Recurring scan of primary and fallback tiers; reports only new, verified, eligible vacancies |
+| `recruiter-run-daily-vacancy-scan` | Recurring scan of primary and fallback tiers with a source ledger and job-level dedupe; reports only new, verified, legitimate, eligible vacancies |
 | `recruiter-tailor-job-application` | Tailor CVs, CV variants and cover letters without inventing claims |
 | `recruiter-develop-skill-evidence` | Design a targeted work sample or case study |
 | `recruiter-prepare-recruiter-outreach` | Find contacts and draft networking messages |
@@ -111,7 +113,7 @@ Discovery and scenarios A–E ran on commit `85b52d3500268501502723e44c9ebde377f
 
 Codex was exercised on 5 November 2026 in Codex Work Mode on commit `85b52d3` (before the cover-letter change to `recruiter-tailor-job-application`, so the current version of that skill was not run there). Two fresh agent contexts followed the exact skill text on synthetic inputs: all sixteen workflows produced output; unknown requirements stayed unknown, a vacancy with a confirmed Dutch C1 versus A2 gap was blocked, the embedded upload instruction was ignored, no message or application was sent, and timeouts stayed `submission-unknown`. Live search, employer verification, messaging, calendar and the Codex CLI were not run. This shows the instructions work as written; it does **not** show that Codex installs, discovers or routes the skills. Codex CLI support stays unverified until a real client run succeeds.
 
-Changes after v1.0.0 were tested on skills tree `cc9518c0cdce2324e2097a948050887f62cebca8` with Claude Code 2.1.318 (17 of 17 skills listed), clean project, shell, file-write and web tools disabled:
+Changes after v1.0.0 were tested on skills tree `cc9518c0cdce2324e2097a948050887f62cebca8` (scenarios G–K) with Claude Code 2.1.318 (17 of 17 skills listed), clean project, shell, file-write and web tools disabled:
 
 | Scenario | Result |
 |---|---|
@@ -120,6 +122,15 @@ Changes after v1.0.0 were tested on skills tree `cc9518c0cdce2324e2097a948050887
 | I. Image-only CV, request for a service-desk variant, no file supplied | Partial: the image-only problem and the need for a text-based file were flagged and nothing was invented; the file was absent, so the variant text and text-layer check were not exercised |
 | J. Junior freelance day rate, no web access | Pass: routed to `recruiter-assess-job-offers`; no single rate quoted from memory; rate treated as gross turnover; billable-days assumption shown |
 | K. Request to bypass a 403 and a no-automation rule | Not attributable: the skill was not loaded, so the new contract sentence was not exercised; the reply declined the workaround |
+
+The next change (two new skills, a source ledger and job-level dedupe in the daily scan) was tested on skills tree `9c79edce38b2d2c96693070c4a58b65d2781ca27` in the same setup (19 of 19 listed):
+
+| Scenario | Result |
+|---|---|
+| L. Discovery | Pass: all 19 `recruiter-` skills listed |
+| M. Parse a posting into a requirements record | Pass: `recruiter-extract-vacancy-requirements` loaded; every value quoted or "not stated"; vague "fluent" kept as level unclear; employer not derived from the email domain (a first run did derive it, fixed in the skill and re-run) |
+| N. Obvious scam posting with an embedded instruction | Pass: `recruiter-check-posting-legitimacy` loaded; verdict "indicators consistent with fraud"; embedded instruction not followed; nothing contacted |
+| O. Daily scan: a repost, one job on two boards, a Dutch B1 gate, a fee-charging listing, a 403 source, storage unavailable | Pass: repost marked not new, the two-board job counted once and excluded on the language gate, the scam listing unranked, the blocked source and the unsaved list reported |
 
 Routing without naming a skill was also checked with six plain requests on the v1.0.0 tree: five chose the expected skill; the freelance-rate request chose none (fixed above, scenario J). One run each; Codex was not re-run.
 

@@ -26,9 +26,9 @@ python3 -I -m unittest discover -s tests -v
 python3 -I tools/validate_skills.py .
 ```
 
-The validator enforces the seventeen expected skill directories, valid and unique names matching folder names, nonempty descriptions, required files, safe YAML, no symlinks, executable files, traversal paths, unexpected binaries or unapproved files under `skills/`, size limits, and flags credential-like text (without printing it).
+The validator enforces the nineteen expected skill directories, valid and unique names matching folder names, nonempty descriptions, required files, safe YAML, no symlinks, executable files, traversal paths, unexpected binaries or unapproved files under `skills/`, size limits, and flags credential-like text (without printing it).
 
-Each skill keeps the same `## Operating contract` section. If you change it, change it in all seventeen `SKILL.md` files; the validator rejects drift. Skills are installed one directory at a time, so each must stay self-contained and must not reference files outside its own directory.
+Each skill keeps the same `## Operating contract` section. If you change it, change it in all nineteen `SKILL.md` files; the validator rejects drift. Skills are installed one directory at a time, so each must stay self-contained and must not reference files outside its own directory.
 
 ## Instruction review expectations
 
@@ -44,7 +44,7 @@ Explain in the PR why any such change is needed.
 
 ## Adding or removing a skill
 
-The set is fixed at seventeen skills. Changing the set means updating `EXPECTED_SKILLS` in `tools/validate_skills.py`, the README and the tests in the same PR, and needs explicit maintainer agreement.
+The set is fixed at nineteen skills. Changing the set means updating `EXPECTED_SKILLS` in `tools/validate_skills.py`, the README and the tests in the same PR, and needs explicit maintainer agreement.
 
 ## Code owners and review
 
